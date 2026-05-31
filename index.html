@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Ngọc Minh ♡ Gia Phát</title>
+    <title>Quà Tặng Em Bé NGỌC MINH</title>
 
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400&display=swap"
@@ -50,6 +50,7 @@
         cursor: pointer;
         transition: opacity 1.2s ease;
         padding: 20px;
+        overflow-y: auto;
       }
       .splash.hidden {
         opacity: 0;
@@ -59,26 +60,43 @@
       .splash-heart {
         font-size: 70px;
         animation: splashPulse 1.5s ease-in-out infinite;
-        margin-bottom: 24px;
+        margin-bottom: 20px;
         filter: drop-shadow(0 0 20px rgba(231,84,128,0.5));
       }
-      @keyframes splashPulse {
-        0%{transform:scale(1)}50%{transform:scale(1.2)}100%{transform:scale(1)}
-      }
+      @keyframes splashPulse{0%{transform:scale(1)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
 
       .splash-title {
         font-family: "Playfair Display", serif;
-        font-size: 32px;
+        font-size: 28px;
         color: #e75480;
-        margin-bottom: 10px;
+        margin-bottom: 16px;
         opacity: 0;
         animation: splashFadeIn 1s ease forwards 0.3s;
         text-align: center;
+        max-width: 90%;
+        line-height: 1.3;
       }
+
+      /* Ảnh trong splash */
+      .splash .image {
+        margin: 16px auto 24px;
+        opacity: 0;
+        animation: splashFadeIn 1s ease forwards 0.5s;
+      }
+      .splash .image img {
+        max-width: 100%;
+        max-height: 220px;
+        width: auto;
+        height: auto;
+        border-radius: 12px;
+        object-fit: contain;
+        box-shadow: 0 8px 24px rgba(231, 84, 128, 0.25);
+      }
+
       .splash-sub {
         font-size: 15px;
         color: #d63384;
-        margin-bottom: 36px;
+        margin-bottom: 28px;
         opacity: 0;
         animation: splashFadeIn 1s ease forwards 0.6s;
         text-align: center;
@@ -104,6 +122,7 @@
         animation: splashFadeIn 1s ease forwards 0.9s, splashBtnGlow 2s ease-in-out infinite 1.5s;
         position: relative;
         overflow: hidden;
+        flex-shrink: 0;
       }
       .splash-btn::before {
         content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
@@ -189,15 +208,121 @@
       .music-label{position:fixed;top:26px;right:78px;z-index:1000;font-size:12px;color:#d63384;padding:5px 12px;border-radius:10px;background:rgba(255,255,255,.2);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.3);white-space:nowrap;opacity:0;transform:translateX(10px);transition:opacity .4s,transform .4s;pointer-events:none}
       .music-label.show{opacity:1;transform:translateX(0)}
 
-      /* ═══ SLIDES ═══ */
-      .slide{position:absolute;width:100%;height:100vh;height:100dvh;display:flex;justify-content:center;align-items:center;text-align:center;opacity:0;transform:scale(1.03);transition:1s ease;pointer-events:none;z-index:2;padding:20px}
-      .slide.active{opacity:1;transform:scale(1);pointer-events:auto}
-      .content{max-width:800px;width:100%;padding:0 15px}
-      h1{font-family:"Playfair Display",serif;font-size:48px;color:#e75480}
-      p{margin-top:20px;font-size:18px;line-height:1.8;color:#d63384}
+      /* ═══════════════════════════════════
+         SLIDES — ⬇️ FIX SCROLL + PADDING BOTTOM
+      ═══════════════════════════════════ */
+      .slide {
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        opacity: 0;
+        transform: scale(1.03);
+        transition: 1s ease;
+        pointer-events: none;
+        z-index: 2;
+        padding: 20px 20px 160px;  /* ⬅️ padding-bottom 160px chừa chỗ cho nút */
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+      }
+      .slide.active {
+        opacity: 1;
+        transform: scale(1);
+        pointer-events: auto;
+      }
+
+      /* Custom scrollbar đẹp */
+      .slide::-webkit-scrollbar {
+        width: 6px;
+      }
+      .slide::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .slide::-webkit-scrollbar-thumb {
+        background: rgba(231, 84, 128, 0.3);
+        border-radius: 3px;
+      }
+      .slide::-webkit-scrollbar-thumb:hover {
+        background: rgba(231, 84, 128, 0.5);
+      }
+
+      .content {
+        max-width: 900px;
+        width: 100%;
+        padding: 0 15px;
+        margin: auto 0;
+      }
+
+      h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 48px;
+        color: #e75480;
+      }
+      p {
+        margin-top: 20px;
+        font-size: 18px;
+        line-height: 1.8;
+        color: #d63384;
+      }
+
+      /* ═══════════════════════════════════════
+         🖼️ IMAGE STYLES — FIX KHÔNG CROP MẶT
+      ═══════════════════════════════════════ */
+      .image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px auto 0;
+      }
+
+      .image img {
+        max-width: 100%;
+        max-height: 380px;
+        width: auto;
+        height: auto;
+        border-radius: 12px;
+        display: block;
+        object-fit: contain;
+        box-shadow: 0 8px 24px rgba(231, 84, 128, 0.15);
+      }
+
+      .image-row {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        align-items: stretch;
+        margin-top: 20px;
+        padding: 0 10px;
+        flex-wrap: wrap;
+      }
+
+      .image-row img {
+        width: calc(33.33% - 8px);
+        max-width: 280px;
+        height: 280px;
+        object-fit: cover;
+        object-position: center top;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(231, 84, 128, 0.15);
+      }
 
       /* ═══ AURA GLASS NAV ═══ */
-      .nav-container{position:fixed;bottom:50px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:16px;z-index:999;padding:0 20px}
+      .nav-container {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        z-index: 999;
+        padding: 0 20px;
+      }
       .nav-wrapper{position:relative;display:flex;align-items:center;justify-content:center;flex-shrink:0}
       .nav-wrapper::before{content:'';position:absolute;width:100px;height:100px;border-radius:50%;background:conic-gradient(from 0deg,#ff6b9d,#ff85b3,#ffb347,#ff6b9d,#c879ff,#ff85b3,#ff6b9d);animation:rotateAura 4s linear infinite;filter:blur(18px);opacity:.7;z-index:-1}
       .nav-wrapper::after{content:'';position:absolute;width:90px;height:90px;border-radius:50%;border:2px solid rgba(255,107,157,.4);animation:auraPulseRing 2.5s ease-out infinite;z-index:-1;pointer-events:none}
@@ -217,12 +342,29 @@
       .hint{font-size:14px;color:#d63384;padding:8px 14px;border-radius:14px;background:rgba(255,255,255,.2);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.35);box-shadow:0 4px 16px rgba(231,84,128,.12);animation:hintFade 2s ease-in-out infinite alternate;max-width:220px;text-align:center;line-height:1.5}
       @keyframes hintFade{0%{opacity:.5}100%{opacity:.85}}
 
+      /* Gradient fade ở đáy slide để cho biết có thể scroll */
+      .scroll-indicator {
+        position: fixed;
+        bottom: 110px;
+        left: 0;
+        right: 0;
+        height: 60px;
+        background: linear-gradient(to top, rgba(255, 214, 232, 0.85), transparent);
+        pointer-events: none;
+        z-index: 998;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .scroll-indicator.show {
+        opacity: 1;
+      }
+
       /* ═══ FINALE ═══ */
       .final{opacity:0;transition:opacity 1.5s ease}.final.show{opacity:1}
       #fireworksCanvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;opacity:0;transition:opacity .5s}
       #fireworksCanvas.active{opacity:1}
       #flashOverlay{position:fixed;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:9;transition:opacity .15s}
-      #lastSlide{background:transparent;transition:background 2s ease}
+      #lastSlide{background:transparent;transition:background 2s ease;padding-bottom:20px}
       #lastSlide.finale-bg{background:radial-gradient(ellipse at center,#fff0f8 0%,#ffe0ef 40%,#ffc1da 100%)}
 
       .finale-title{font-family:"Playfair Display",serif;font-size:48px;background:linear-gradient(90deg,#e75480,#ff85b3,#ffb347,#ff6b9d,#c2185b,#e75480);background-size:300% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmerTitle 3s linear infinite;filter:drop-shadow(0 0 18px rgba(231,84,128,.7))}
@@ -240,60 +382,59 @@
       .glow-ring{position:fixed;border-radius:50%;border:3px solid rgba(231,84,128,.6);pointer-events:none;z-index:8;animation:expandRing 1.5s ease-out forwards}
       @keyframes expandRing{0%{transform:translate(-50%,-50%)scale(0);opacity:1}100%{transform:translate(-50%,-50%)scale(6);opacity:0}}
 
-      /* ═══════════════════════════════════
-         IMAGE STYLES
-      ═══════════════════════════════════ */
-      .image img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 8px;
-        display: block;
-        margin: 15px auto 0;
-      }
-
-      .image-row {
-        display: flex;
-        gap: 10px;
-        justify-content: center;
-        margin-top: 20px;
-        padding: 0 10px;
-      }
-
-      .image-row img {
-        width: 33.33%;
-        height: 250px;
-        object-fit: cover;
-        border-radius: 8px;
+      /* ══════════════════════════════════════
+         📱 RESPONSIVE: TABLET (≤ 1024px)
+      ══════════════════════════════════════ */
+      @media (max-width: 1024px) {
+        .image img { max-height: 340px; }
+        .image-row img { height: 240px; }
       }
 
       /* ══════════════════════════════════════
-         RESPONSIVE: TABLET (≤ 768px)
+         📱 RESPONSIVE: TABLET (≤ 768px)
       ══════════════════════════════════════ */
       @media (max-width: 768px) {
-        h1 { font-size: 36px; }
-        p { font-size: 16px; margin-top: 16px; line-height: 1.7; }
+        h1 { font-size: 32px; }
+        p { font-size: 15px; margin-top: 14px; line-height: 1.7; }
 
-        .splash-heart { font-size: 60px; margin-bottom: 20px; }
-        .splash-title { font-size: 26px; }
-        .splash-sub { font-size: 14px; margin-bottom: 28px; }
-        .splash-btn { padding: 14px 30px; font-size: 16px; }
+        .splash-heart { font-size: 55px; margin-bottom: 16px; }
+        .splash-title { font-size: 24px; }
+        .splash .image img { max-height: 200px; }
+        .splash-sub { font-size: 14px; margin-bottom: 24px; }
+        .splash-btn { padding: 13px 28px; font-size: 15px; }
         .splash-note { font-size: 12px; }
 
-        .content { padding: 0 20px; }
+        .slide { padding: 20px 15px 150px; }
+        .content { padding: 0 15px; }
 
-        .image-row { flex-direction: column; align-items: center; gap: 12px; }
-        .image-row img { width: 85%; height: 200px; }
+        .image img {
+          max-height: 280px;
+          max-width: 90%;
+        }
 
-        .nav { width: 64px; height: 64px; font-size: 30px; }
-        .nav-wrapper::before { width: 90px; height: 90px; }
-        .nav-wrapper::after { width: 80px; height: 80px; }
+        .image-row {
+          flex-direction: column;
+          align-items: center;
+          gap: 12px;
+        }
+        .image-row img {
+          width: 80%;
+          max-width: 320px;
+          height: auto;
+          max-height: 300px;
+          object-fit: contain;
+        }
 
-        .nav-container { bottom: 40px; gap: 12px; }
+        .nav { width: 60px; height: 60px; font-size: 28px; }
+        .nav-wrapper::before { width: 85px; height: 85px; }
+        .nav-wrapper::after { width: 75px; height: 75px; }
+
+        .nav-container { bottom: 25px; gap: 12px; }
         .hint { font-size: 13px; padding: 7px 12px; max-width: 180px; }
 
-        .finale-title { font-size: 36px; }
-        .finale-line { font-size: 16px; }
-        .finale-signature { font-size: 14px; margin-top: 24px; }
+        .finale-title { font-size: 32px; }
+        .finale-line { font-size: 15px; }
+        .finale-signature { font-size: 14px; margin-top: 20px; }
 
         .music-btn { width: 44px; height: 44px; top: 16px; right: 16px; }
         .music-label { top: 22px; right: 68px; font-size: 11px; padding: 4px 10px; }
@@ -305,41 +446,65 @@
       }
 
       /* ══════════════════════════════════════
-         RESPONSIVE: MOBILE (≤ 480px)
+         📱 RESPONSIVE: MOBILE (≤ 480px)
+         ⬇️ FIX CHÍNH: ảnh nhỏ hơn, nav dọc, padding bottom đủ
       ══════════════════════════════════════ */
       @media (max-width: 480px) {
-        h1 { font-size: 28px; }
-        p { font-size: 14px; margin-top: 14px; line-height: 1.7; }
+        h1 { font-size: 24px; }
+        p { font-size: 13px; margin-top: 12px; line-height: 1.65; }
 
-        .splash-heart { font-size: 50px; margin-bottom: 16px; }
-        .splash-title { font-size: 22px; }
-        .splash-sub { font-size: 13px; margin-bottom: 24px; }
-        .splash-btn { padding: 12px 26px; font-size: 15px; }
-        .splash-note { font-size: 11px; margin-top: 14px; }
+        .splash-heart { font-size: 48px; margin-bottom: 12px; }
+        .splash-title { font-size: 20px; line-height: 1.3; }
+        .splash .image img { max-height: 170px; }
+        .splash-sub { font-size: 12px; margin-bottom: 20px; }
+        .splash-btn { padding: 12px 24px; font-size: 14px; }
+        .splash-note { font-size: 11px; margin-top: 12px; }
 
-        .slide { padding: 15px; }
-        .content { padding: 0 10px; }
+        /* ⬇️ Padding-bottom 180px để chừa chỗ cho nav DỌC */
+        .slide { padding: 15px 12px 180px; }
+        .content { padding: 0 8px; }
 
-        .image-row img { width: 95%; height: 180px; }
-        .image img { max-height: 220px; }
+        /* ⬇️ Ảnh đơn — NHỎ HƠN */
+        .image { margin: 14px auto 0; }
+        .image img {
+          max-height: 220px;
+          max-width: 88%;
+        }
 
-        .nav { width: 58px; height: 58px; font-size: 26px; }
-        .nav-wrapper::before { width: 80px; height: 80px; filter: blur(14px); }
-        .nav-wrapper::after { width: 72px; height: 72px; }
+        /* ⬇️ 3 ảnh dọc — NHỎ HƠN NỮA, không tràn */
+        .image-row {
+          flex-direction: column;
+          align-items: center;
+          gap: 10px;
+          margin-top: 14px;
+        }
+        .image-row img {
+          width: 75%;
+          max-width: 260px;
+          height: auto;
+          max-height: 230px;
+          object-fit: contain;
+        }
+
+        .nav { width: 56px; height: 56px; font-size: 24px; }
+        .nav-wrapper::before { width: 75px; height: 75px; filter: blur(14px); }
+        .nav-wrapper::after { width: 68px; height: 68px; }
 
         .nav-container {
-          bottom: 30px;
-          gap: 10px;
+          bottom: 20px;
+          gap: 8px;
           flex-direction: column;
         }
-        .hint { font-size: 12px; padding: 6px 12px; max-width: 260px; }
+        .hint { font-size: 11px; padding: 5px 10px; max-width: 240px; }
 
-        .finale-title { font-size: 28px; }
-        .finale-line { font-size: 14px; line-height: 1.7; }
-        .finale-signature { font-size: 13px; margin-top: 20px; line-height: 1.7; }
+        .scroll-indicator { bottom: 130px; }
 
-        .music-btn { width: 40px; height: 40px; top: 14px; right: 14px; }
-        .eq-container { gap: 2px; height: 14px; }
+        .finale-title { font-size: 24px; }
+        .finale-line { font-size: 13px; line-height: 1.65; }
+        .finale-signature { font-size: 12px; margin-top: 16px; line-height: 1.65; }
+
+        .music-btn { width: 38px; height: 38px; top: 12px; right: 12px; }
+        .eq-container { gap: 2px; height: 12px; }
         .eq-bar { width: 2.5px; }
         .music-label { display: none; }
 
@@ -348,52 +513,104 @@
         .glow-3 { width: 180px; height: 180px; }
         .glow-4 { width: 140px; height: 140px; }
 
-        .float-heart { font-size: 20px; }
+        .float-heart { font-size: 18px; }
       }
 
       /* ══════════════════════════════════════
-         RESPONSIVE: VERY SMALL (≤ 360px)
+         📱 RESPONSIVE: VERY SMALL (≤ 360px)
       ══════════════════════════════════════ */
       @media (max-width: 360px) {
-        h1 { font-size: 24px; }
-        p { font-size: 13px; }
-        .splash-title { font-size: 20px; }
-        .splash-btn { padding: 11px 22px; font-size: 14px; }
-        .finale-title { font-size: 24px; }
-        .finale-line { font-size: 13px; }
-        .finale-signature { font-size: 12px; }
-        .nav { width: 52px; height: 52px; font-size: 24px; }
-        .nav-container { bottom: 24px; }
+        h1 { font-size: 22px; }
+        p { font-size: 12px; }
+        .splash-title { font-size: 18px; }
+        .splash .image img { max-height: 140px; }
+        .splash-btn { padding: 10px 20px; font-size: 13px; }
+        .finale-title { font-size: 22px; }
+        .finale-line { font-size: 12px; }
+        .finale-signature { font-size: 11px; }
+        .nav { width: 50px; height: 50px; font-size: 22px; }
+        .nav-container { bottom: 16px; }
+
+        .slide { padding: 12px 10px 170px; }
+
+        .image img {
+          max-height: 190px;
+          max-width: 92%;
+        }
+        .image-row img {
+          max-height: 200px;
+          width: 80%;
+          max-width: 220px;
+        }
       }
 
       /* ══════════════════════════════════════
-         LANDSCAPE MOBILE
+         📱 NARROW SCREEN (≤ 400px width)
+         Đặc biệt cho màn hình dài hẹp như iPhone SE
+      ══════════════════════════════════════ */
+      @media (max-width: 400px) {
+        .image-row img {
+          width: 70%;
+          max-width: 240px;
+          max-height: 210px;
+        }
+        .image img {
+          max-height: 200px;
+        }
+      }
+
+      /* ══════════════════════════════════════
+         📱 LANDSCAPE MOBILE
       ══════════════════════════════════════ */
       @media (max-height: 500px) and (orientation: landscape) {
-        h1 { font-size: 24px; }
+        h1 { font-size: 22px; }
         p { font-size: 13px; margin-top: 8px; }
-        .image img { max-height: 140px; }
-        .image-row { flex-direction: row; }
-        .image-row img { height: 120px; width: 30%; }
-        .nav-container { bottom: 15px; }
-        .nav { width: 48px; height: 48px; font-size: 22px; }
-        .splash-heart { font-size: 40px; margin-bottom: 10px; }
-        .splash-title { font-size: 20px; margin-bottom: 6px; }
-        .splash-sub { font-size: 12px; margin-bottom: 16px; }
-        .splash-btn { padding: 10px 22px; font-size: 14px; }
-        .finale-title { font-size: 24px; }
-        .finale-line { font-size: 13px; }
-        .finale-signature { font-size: 12px; margin-top: 12px; }
+
+        .slide { padding: 15px 20px 100px; }
+
+        .image img {
+          max-height: 150px;
+          max-width: 75%;
+        }
+        .image-row {
+          flex-direction: row;
+          gap: 8px;
+        }
+        .image-row img {
+          height: 130px;
+          max-height: 130px;
+          width: 25%;
+          max-width: 160px;
+          object-fit: cover;
+          object-position: center top;
+        }
+
+        .nav-container { bottom: 12px; flex-direction: row; }
+        .nav { width: 46px; height: 46px; font-size: 20px; }
+        .nav-wrapper::before { width: 64px; height: 64px; }
+        .nav-wrapper::after { width: 58px; height: 58px; }
+
+        .splash-heart { font-size: 36px; margin-bottom: 8px; }
+        .splash-title { font-size: 18px; margin-bottom: 6px; }
+        .splash .image img { max-height: 110px; }
+        .splash-sub { font-size: 11px; margin-bottom: 12px; }
+        .splash-btn { padding: 9px 20px; font-size: 13px; }
+        .splash-note { font-size: 10px; margin-top: 8px; }
+
+        .finale-title { font-size: 22px; }
+        .finale-line { font-size: 12px; }
+        .finale-signature { font-size: 11px; margin-top: 10px; }
       }
     </style>
   </head>
   <body>
-
     <!-- ═══ SPLASH SCREEN ═══ -->
     <div class="splash" id="splashScreen">
       <div class="splash-heart">💗</div>
-      <div class="splash-title">Ngọc Minh ♡ Gia Phát</div>
-      <div class="splash-sub">Một câu chuyện tình yêu 10 năm…</div>
+      <div class="splash-title">
+        Món Quà Này Chỉ Dành Riêng Cho EmBes Ngọc Minh Của Anh
+      </div>
+      <div class="image"><img src="./img/grow2.jpg" alt="2013" /></div>
       <button class="splash-btn" id="splashBtn" type="button">
         🎵 Bấm để bắt đầu
       </button>
@@ -404,14 +621,18 @@
 
     <!-- ═══ AUDIO ═══ -->
     <audio id="bgMusic" loop preload="auto">
-      <source src="./music/50 Năm Về Sau - Đặng Thanh Tuyền - tải mp3 download - lời bài hát.mp3" type="audio/mpeg">
+      <source src="./music/50 Năm Về Sau - Đặng Thanh Tuyền - tải mp3 download - lời bài hát.mp3" type="audio/mpeg" />
     </audio>
 
     <!-- ═══ MUSIC BUTTON ═══ -->
     <div class="music-label" id="musicLabel"></div>
     <div class="music-btn paused" id="musicBtn" title="Bật/Tắt nhạc">
       <div class="eq-container">
-        <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
       </div>
     </div>
 
@@ -425,23 +646,32 @@
     <div class="grain"></div>
     <div class="light-rays" id="lightRays"></div>
 
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
     <!-- ═══ SLIDES ═══ -->
     <div class="slide active">
       <div class="content">
         <h1>2013</h1>
-        <p>Hai đứa học sinh năm ấy, không biết rằng ánh nhìn hôm đó sẽ trở thành<br>10 năm bên nhau.</p>
-        <div class="image"><img src="./img/2013.jpg" /></div>
+        <p>
+          Hai đứa học sinh năm ấy, không biết rằng ánh nhìn hôm đó sẽ trở thành<br />10
+          năm bên nhau.
+        </p>
+        <div class="image"><img src="./img/2013.jpg" alt="2013" /></div>
       </div>
     </div>
 
     <div class="slide">
       <div class="content">
         <h1>Chúng Ta Lớn Lên Cùng Nhau</h1>
-        <p>Cùng thi cử. Cùng mơ ước. Có lúc giận hờn, có lúc yếu lòng.<br/>Nhưng vẫn luôn bên cạnh và đồng hành cùng nhau.</p>
+        <p>
+          Cùng thi cử. Cùng mơ ước. Có lúc giận hờn, có lúc yếu lòng.<br />Nhưng
+          vẫn luôn bên cạnh và đồng hành cùng nhau.
+        </p>
         <div class="image-row">
-          <img src="./img/grow1.jpg" />
-          <img src="./img/grow3.jpg" />
-          <img src="./img/grow4.jpg" />
+          <img src="./img/grow1.jpg" alt="grow1" />
+          <img src="./img/grow3.jpg" alt="grow3" />
+          <img src="./img/grow4.jpg" alt="grow4" />
         </div>
       </div>
     </div>
@@ -451,7 +681,7 @@
         <h1>2023 💍</h1>
         <p>Khi em bước vào lễ đường, anh không chỉ thấy một cô dâu.</p>
         <div class="image">
-          <img src="./img/maried.jpg" style="max-height:300px;" />
+          <img src="./img/maried.jpg" alt="married" />
         </div>
         <p>anh thấy cả thanh xuân và tương lai của mình đang đứng trước mặt.</p>
       </div>
@@ -460,9 +690,12 @@
     <div class="slide">
       <div class="content">
         <h1>2026</h1>
-        <p>Hơn 10 năm không phải là khoảng thời gian dễ dàng.<br>Nhưng điều khiến anh tự hào nhất không phải là thời gian.</p>
+        <p>
+          Hơn 10 năm không phải là khoảng thời gian dễ dàng.<br />Nhưng điều
+          khiến anh tự hào nhất không phải là thời gian.
+        </p>
         <div class="image">
-          <img src="./img/Max_a_hãy_chình_sửa_lại_nh.png" style="max-height:350px;" />
+          <img src="./img/Max_a_hãy_chình_sửa_lại_nh.png" alt="2026" />
         </div>
         <p>Mà là chúng ta vẫn chọn bên cạnh nhau.</p>
       </div>
@@ -473,18 +706,25 @@
 
     <!-- ═══ SLIDE CUỐI ═══ -->
     <div class="slide" id="lastSlide">
-      <div class="content" style="position:relative;z-index:2">
+      <div class="content" style="position: relative; z-index: 2">
         <div class="final" id="finalText">
           <h1 class="finale-title">Ngọc Minh à…</h1>
-          <div style="margin-top:24px">
-            <p class="finale-line" id="fl1">Nếu được quay lại năm 2013, Anh vẫn sẽ chọn được quen biết em.</p>
-            <p class="finale-line" id="fl2" style="margin-top:12px">Vẫn sẽ nhắn tin trước. Vẫn sẽ yêu em như cách đã yêu suốt 10 năm qua.</p>
-            <p class="finale-line" id="fl3" style="margin-top:12px">Và vẫn sẽ chọn cưới em thêm một lần nữa.</p>
+          <div style="margin-top: 24px">
+            <p class="finale-line" id="fl1">
+              Nếu được quay lại năm 2013, Anh vẫn sẽ chọn được quen biết em.
+            </p>
+            <p class="finale-line" id="fl2" style="margin-top: 12px">
+              Vẫn sẽ nhắn tin trước. Vẫn sẽ yêu em như cách đã yêu suốt 10 năm
+              qua.
+            </p>
+            <p class="finale-line" id="fl3" style="margin-top: 12px">
+              Và vẫn sẽ chọn cưới em thêm một lần nữa.
+            </p>
           </div>
           <div class="finale-signature" id="finaleSig">
-            hãy để anh xin phép được bước tiếp cùng em thêm nhiều lần 10 năm nữa nhé…
-            <br/>✨ 10 Years — Just the Beginning ✨
-            <br/>— Gia Phát —
+            hãy để anh xin phép được bước tiếp cùng em thêm nhiều lần 10 năm nữa
+            nhé…
+            <br />✨ 10 Years — Just the Beginning ✨ <br />— Gia Phát —
           </div>
         </div>
       </div>
@@ -499,106 +739,409 @@
     </div>
 
     <script>
-      let current=0;
-      const slides=document.querySelectorAll(".slide");
-      const nav=document.getElementById("nav");
-      const hint=document.getElementById("hint");
-      const navContainer=document.getElementById("navContainer");
-      const finalText=document.getElementById("finalText");
-      const lastSlide=document.getElementById("lastSlide");
-      const flashOverlay=document.getElementById("flashOverlay");
-      const canvas=document.getElementById("fireworksCanvas");
-      const ctx=canvas.getContext("2d");
-      const bgMusic=document.getElementById('bgMusic');
-      const musicBtn=document.getElementById('musicBtn');
-      const musicLabel=document.getElementById('musicLabel');
-      const splashScreen=document.getElementById('splashScreen');
-      const splashBtn=document.getElementById('splashBtn');
-      let isMusicPlaying=false,splashDone=false;
+      let current = 0;
+      const slides = document.querySelectorAll(".slide");
+      const nav = document.getElementById("nav");
+      const hint = document.getElementById("hint");
+      const navContainer = document.getElementById("navContainer");
+      const finalText = document.getElementById("finalText");
+      const lastSlide = document.getElementById("lastSlide");
+      const flashOverlay = document.getElementById("flashOverlay");
+      const canvas = document.getElementById("fireworksCanvas");
+      const ctx = canvas.getContext("2d");
+      const bgMusic = document.getElementById("bgMusic");
+      const musicBtn = document.getElementById("musicBtn");
+      const musicLabel = document.getElementById("musicLabel");
+      const splashScreen = document.getElementById("splashScreen");
+      const splashBtn = document.getElementById("splashBtn");
+      const scrollIndicator = document.getElementById("scrollIndicator");
+      let isMusicPlaying = false, splashDone = false;
 
-      /* ═══ SPLASH ═══ */
-      splashBtn.addEventListener('click',handleSplash);
-      splashScreen.addEventListener('click',handleSplash);
-
-      function handleSplash(e){
-        if(splashDone)return;splashDone=true;
-        bgMusic.volume=0.01;
-        const p=bgMusic.play();
-        if(p!==undefined){
-          p.then(()=>{isMusicPlaying=true;startFadeIn();showMB('playing')})
-          .catch(()=>{setTimeout(()=>{bgMusic.play().then(()=>{isMusicPlaying=true;startFadeIn();showMB('playing')}).catch(()=>showMB('paused'))},100)});
+      /* ═══ SCROLL INDICATOR ═══ */
+      function checkScrollable() {
+        const activeSlide = document.querySelector('.slide.active');
+        if (!activeSlide) return;
+        const hasScroll = activeSlide.scrollHeight > activeSlide.clientHeight;
+        const isAtBottom = activeSlide.scrollTop + activeSlide.clientHeight >= activeSlide.scrollHeight - 20;
+        if (hasScroll && !isAtBottom) {
+          scrollIndicator.classList.add('show');
+        } else {
+          scrollIndicator.classList.remove('show');
         }
-        splashScreen.classList.add('hidden');
-        setTimeout(()=>{splashScreen.style.display='none'},1500);
       }
 
-      function startFadeIn(){const d=2500,s=50,st=d/s;let c=0;const i=setInterval(()=>{c++;bgMusic.volume=Math.min(c/s,1);if(c>=s)clearInterval(i)},st)}
+      slides.forEach(slide => {
+        slide.addEventListener('scroll', checkScrollable);
+      });
+      window.addEventListener('resize', checkScrollable);
 
-      function showMB(state){setTimeout(()=>{musicBtn.classList.add('visible');musicBtn.classList.remove('playing','paused');musicBtn.classList.add(state);if(state==='playing'){musicLabel.textContent='🎵 Đang phát nhạc…'}else{musicLabel.textContent='🔇 Bấm để bật nhạc'}musicLabel.classList.add('show');setTimeout(()=>musicLabel.classList.remove('show'),3000)},600)}
+      /* ═══ SPLASH ═══ */
+      splashBtn.addEventListener("click", handleSplash);
+      splashScreen.addEventListener("click", handleSplash);
 
-      /* ═══ MUSIC TOGGLE ═══ */
-      musicBtn.addEventListener('click',function(){
-        if(isMusicPlaying){
-          const sv=bgMusic.volume;let s=0;const i=setInterval(()=>{s++;bgMusic.volume=Math.max(sv*(1-s/20),0);if(s>=20){clearInterval(i);bgMusic.pause();isMusicPlaying=false;musicBtn.classList.remove('playing');musicBtn.classList.add('paused')}},50);
-          musicLabel.textContent='🔇 Đã tắt nhạc';musicLabel.classList.add('show');setTimeout(()=>musicLabel.classList.remove('show'),2000);
-        }else{
-          bgMusic.volume=0.01;bgMusic.play().then(()=>{isMusicPlaying=true;musicBtn.classList.remove('paused');musicBtn.classList.add('playing');startFadeIn();musicLabel.textContent='🎵 Đang phát nhạc…';musicLabel.classList.add('show');setTimeout(()=>musicLabel.classList.remove('show'),2000)});
+      function handleSplash(e) {
+        if (splashDone) return;
+        splashDone = true;
+        bgMusic.volume = 0.01;
+        const p = bgMusic.play();
+        if (p !== undefined) {
+          p.then(() => {
+            isMusicPlaying = true;
+            startFadeIn();
+            showMB("playing");
+          }).catch(() => {
+            setTimeout(() => {
+              bgMusic.play().then(() => {
+                isMusicPlaying = true;
+                startFadeIn();
+                showMB("playing");
+              }).catch(() => showMB("paused"));
+            }, 100);
+          });
+        }
+        splashScreen.classList.add("hidden");
+        setTimeout(() => {
+          splashScreen.style.display = "none";
+          checkScrollable();
+        }, 1500);
+      }
+
+      function startFadeIn() {
+        const d = 2500, s = 50, st = d / s;
+        let c = 0;
+        const i = setInterval(() => {
+          c++;
+          bgMusic.volume = Math.min(c / s, 1);
+          if (c >= s) clearInterval(i);
+        }, st);
+      }
+
+      function showMB(state) {
+        setTimeout(() => {
+          musicBtn.classList.add("visible");
+          musicBtn.classList.remove("playing", "paused");
+          musicBtn.classList.add(state);
+          if (state === "playing") {
+            musicLabel.textContent = "🎵 Đang phát nhạc…";
+          } else {
+            musicLabel.textContent = "🔇 Bấm để bật nhạc";
+          }
+          musicLabel.classList.add("show");
+          setTimeout(() => musicLabel.classList.remove("show"), 3000);
+        }, 600);
+      }
+
+      musicBtn.addEventListener("click", function () {
+        if (isMusicPlaying) {
+          const sv = bgMusic.volume;
+          let s = 0;
+          const i = setInterval(() => {
+            s++;
+            bgMusic.volume = Math.max(sv * (1 - s / 20), 0);
+            if (s >= 20) {
+              clearInterval(i);
+              bgMusic.pause();
+              isMusicPlaying = false;
+              musicBtn.classList.remove("playing");
+              musicBtn.classList.add("paused");
+            }
+          }, 50);
+          musicLabel.textContent = "🔇 Đã tắt nhạc";
+          musicLabel.classList.add("show");
+          setTimeout(() => musicLabel.classList.remove("show"), 2000);
+        } else {
+          bgMusic.volume = 0.01;
+          bgMusic.play().then(() => {
+            isMusicPlaying = true;
+            musicBtn.classList.remove("paused");
+            musicBtn.classList.add("playing");
+            startFadeIn();
+            musicLabel.textContent = "🎵 Đang phát nhạc…";
+            musicLabel.classList.add("show");
+            setTimeout(() => musicLabel.classList.remove("show"), 2000);
+          });
         }
       });
 
       /* ═══ BG GEN ═══ */
-      (function(){const c=['rgba(255,182,213,.25)','rgba(255,214,232,.2)','rgba(255,143,191,.18)','rgba(255,233,243,.3)','rgba(255,255,255,.15)'];const n=window.innerWidth<600?8:18;for(let i=0;i<n;i++){const b=document.createElement('div');b.className='bokeh';const s=20+Math.random()*60;b.style.width=s+'px';b.style.height=s+'px';b.style.left=Math.random()*100+'vw';b.style.background=`radial-gradient(circle,${c[Math.floor(Math.random()*c.length)]},transparent 70%)`;b.style.animationDuration=(15+Math.random()*20)+'s';b.style.animationDelay=(Math.random()*15)+'s';document.body.appendChild(b)}})();
-      (function(){const n=window.innerWidth<600?6:12;for(let i=0;i<n;i++){const s=document.createElement('div');s.className='star-sparkle';s.style.left=Math.random()*100+'vw';s.style.top=Math.random()*100+'vh';s.style.animationDuration=(3+Math.random()*5)+'s';s.style.animationDelay=(Math.random()*6)+'s';document.body.appendChild(s)}})();
-      (function(){const c=['🌸','✿','❀'];const n=window.innerWidth<600?5:10;for(let i=0;i<n;i++){const p=document.createElement('div');p.className='petal';p.textContent=c[Math.floor(Math.random()*c.length)];p.style.left=Math.random()*100+'vw';p.style.fontSize=(10+Math.random()*12)+'px';p.style.animationDuration=(12+Math.random()*15)+'s';p.style.animationDelay=(Math.random()*12)+'s';p.style.setProperty('--drift',(Math.random()*200-100)+'px');document.body.appendChild(p)}})();
-      (function(){const c=document.getElementById('lightRays');const n=window.innerWidth<600?3:5;for(let i=0;i<n;i++){const r=document.createElement('div');r.className='light-ray';r.style.left=(15+i*(70/n))+'%';r.style.animationDuration=(8+Math.random()*6)+'s';r.style.animationDelay=(i*1.5)+'s';r.style.opacity=(0.15+Math.random()*0.2).toString();c.appendChild(r)}})();
-      (function(){const w=document.querySelector('.nav-wrapper');for(let i=0;i<8;i++){const sp=document.createElement('div');sp.className='nav-sparkle';const a=(Math.PI*2/8)*i;const d=35+Math.random()*12;sp.style.setProperty('--tx',Math.cos(a)*d+'px');sp.style.setProperty('--ty',Math.sin(a)*d+'px');sp.style.left='50%';sp.style.top='50%';sp.style.animationDelay=(i*.3)+'s';w.appendChild(sp)}})();
+      (function () {
+        const c = ["rgba(255,182,213,.25)","rgba(255,214,232,.2)","rgba(255,143,191,.18)","rgba(255,233,243,.3)","rgba(255,255,255,.15)"];
+        const n = window.innerWidth < 600 ? 8 : 18;
+        for (let i = 0; i < n; i++) {
+          const b = document.createElement("div");
+          b.className = "bokeh";
+          const s = 20 + Math.random() * 60;
+          b.style.width = s + "px"; b.style.height = s + "px";
+          b.style.left = Math.random() * 100 + "vw";
+          b.style.background = `radial-gradient(circle,${c[Math.floor(Math.random() * c.length)]},transparent 70%)`;
+          b.style.animationDuration = 15 + Math.random() * 20 + "s";
+          b.style.animationDelay = Math.random() * 15 + "s";
+          document.body.appendChild(b);
+        }
+      })();
+      (function () {
+        const n = window.innerWidth < 600 ? 6 : 12;
+        for (let i = 0; i < n; i++) {
+          const s = document.createElement("div");
+          s.className = "star-sparkle";
+          s.style.left = Math.random() * 100 + "vw";
+          s.style.top = Math.random() * 100 + "vh";
+          s.style.animationDuration = 3 + Math.random() * 5 + "s";
+          s.style.animationDelay = Math.random() * 6 + "s";
+          document.body.appendChild(s);
+        }
+      })();
+      (function () {
+        const c = ["🌸", "✿", "❀"];
+        const n = window.innerWidth < 600 ? 5 : 10;
+        for (let i = 0; i < n; i++) {
+          const p = document.createElement("div");
+          p.className = "petal";
+          p.textContent = c[Math.floor(Math.random() * c.length)];
+          p.style.left = Math.random() * 100 + "vw";
+          p.style.fontSize = 10 + Math.random() * 12 + "px";
+          p.style.animationDuration = 12 + Math.random() * 15 + "s";
+          p.style.animationDelay = Math.random() * 12 + "s";
+          p.style.setProperty("--drift", Math.random() * 200 - 100 + "px");
+          document.body.appendChild(p);
+        }
+      })();
+      (function () {
+        const c = document.getElementById("lightRays");
+        const n = window.innerWidth < 600 ? 3 : 5;
+        for (let i = 0; i < n; i++) {
+          const r = document.createElement("div");
+          r.className = "light-ray";
+          r.style.left = 15 + i * (70 / n) + "%";
+          r.style.animationDuration = 8 + Math.random() * 6 + "s";
+          r.style.animationDelay = i * 1.5 + "s";
+          r.style.opacity = (0.15 + Math.random() * 0.2).toString();
+          c.appendChild(r);
+        }
+      })();
+      (function () {
+        const w = document.querySelector(".nav-wrapper");
+        for (let i = 0; i < 8; i++) {
+          const sp = document.createElement("div");
+          sp.className = "nav-sparkle";
+          const a = ((Math.PI * 2) / 8) * i;
+          const d = 35 + Math.random() * 12;
+          sp.style.setProperty("--tx", Math.cos(a) * d + "px");
+          sp.style.setProperty("--ty", Math.sin(a) * d + "px");
+          sp.style.left = "50%"; sp.style.top = "50%";
+          sp.style.animationDelay = i * 0.3 + "s";
+          w.appendChild(sp);
+        }
+      })();
 
-      nav.addEventListener('click',function(e){const r=nav.getBoundingClientRect();const rp=document.createElement('div');rp.className='ripple';const s=Math.max(r.width,r.height);rp.style.width=rp.style.height=s+'px';rp.style.left=(e.clientX-r.left-s/2)+'px';rp.style.top=(e.clientY-r.top-s/2)+'px';nav.appendChild(rp);setTimeout(()=>rp.remove(),600)});
+      nav.addEventListener("click", function (e) {
+        const r = nav.getBoundingClientRect();
+        const rp = document.createElement("div");
+        rp.className = "ripple";
+        const s = Math.max(r.width, r.height);
+        rp.style.width = rp.style.height = s + "px";
+        rp.style.left = e.clientX - r.left - s / 2 + "px";
+        rp.style.top = e.clientY - r.top - s / 2 + "px";
+        nav.appendChild(rp);
+        setTimeout(() => rp.remove(), 600);
+      });
 
-      const spN=window.innerWidth<600?18:35;
-      for(let i=0;i<spN;i++){const s=document.createElement("div");s.classList.add("sparkle");s.style.left=Math.random()*100+"vw";s.style.animationDuration=6+Math.random()*6+"s";s.style.animationDelay=Math.random()*5+"s";document.body.appendChild(s)}
+      const spN = window.innerWidth < 600 ? 18 : 35;
+      for (let i = 0; i < spN; i++) {
+        const s = document.createElement("div");
+        s.classList.add("sparkle");
+        s.style.left = Math.random() * 100 + "vw";
+        s.style.animationDuration = 6 + Math.random() * 6 + "s";
+        s.style.animationDelay = Math.random() * 5 + "s";
+        document.body.appendChild(s);
+      }
 
       /* ═══ SLIDE NAV ═══ */
-      function nextSlide(){
-        slides[current].classList.remove("active");current++;
-        if(current<slides.length-1){slides[current].classList.add("active");hint.style.display="none"}
-        else if(current===slides.length-1){slides[current].classList.add("active");navContainer.style.display="none";triggerFinale()}
+      function nextSlide() {
+        slides[current].classList.remove("active");
+        slides[current].scrollTop = 0;
+        current++;
+        if (current < slides.length - 1) {
+          slides[current].classList.add("active");
+          hint.style.display = "none";
+          setTimeout(checkScrollable, 100);
+        } else if (current === slides.length - 1) {
+          slides[current].classList.add("active");
+          navContainer.style.display = "none";
+          scrollIndicator.classList.remove('show');
+          triggerFinale();
+        }
       }
-      nav.addEventListener("click",nextSlide);
+      nav.addEventListener("click", nextSlide);
 
       /* ═══ FINALE ═══ */
-      function triggerFinale(){
-        flashOverlay.style.opacity="1";setTimeout(()=>{flashOverlay.style.opacity="0"},180);
-        setTimeout(()=>{lastSlide.classList.add("finale-bg")},200);
+      function triggerFinale() {
+        flashOverlay.style.opacity = "1";
+        setTimeout(() => { flashOverlay.style.opacity = "0"; }, 180);
+        setTimeout(() => { lastSlide.classList.add("finale-bg"); }, 200);
         spawnGlowRings();
-        canvas.width=window.innerWidth;canvas.height=window.innerHeight;
-        canvas.classList.add("active");startFireworks();
-        const hi=setInterval(spawnFH,400);setTimeout(()=>clearInterval(hi),8000);
-        setTimeout(()=>{finalText.classList.add("show")},400);
-        setTimeout(()=>document.getElementById("fl1").classList.add("visible"),900);
-        setTimeout(()=>document.getElementById("fl2").classList.add("visible"),1700);
-        setTimeout(()=>document.getElementById("fl3").classList.add("visible"),2500);
-        setTimeout(()=>{document.getElementById("finaleSig").classList.add("visible");spawnHB()},3600);
-        setTimeout(()=>{canvas.classList.remove("active");stopFW()},9000);
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        canvas.classList.add("active");
+        startFireworks();
+        const hi = setInterval(spawnFH, 400);
+        setTimeout(() => clearInterval(hi), 8000);
+        setTimeout(() => { finalText.classList.add("show"); }, 400);
+        setTimeout(() => document.getElementById("fl1").classList.add("visible"), 900);
+        setTimeout(() => document.getElementById("fl2").classList.add("visible"), 1700);
+        setTimeout(() => document.getElementById("fl3").classList.add("visible"), 2500);
+        setTimeout(() => {
+          document.getElementById("finaleSig").classList.add("visible");
+          spawnHB();
+        }, 3600);
+        setTimeout(() => {
+          canvas.classList.remove("active");
+          stopFW();
+        }, 9000);
       }
 
-      function spawnGlowRings(){const cx=window.innerWidth/2,cy=window.innerHeight/2;[60,110,160].forEach((s,i)=>{setTimeout(()=>{const r=document.createElement("div");r.className="glow-ring";r.style.cssText=`width:${s}px;height:${s}px;left:${cx}px;top:${cy}px`;document.body.appendChild(r);setTimeout(()=>r.remove(),1600)},i*180)})}
+      function spawnGlowRings() {
+        const cx = window.innerWidth / 2, cy = window.innerHeight / 2;
+        [60, 110, 160].forEach((s, i) => {
+          setTimeout(() => {
+            const r = document.createElement("div");
+            r.className = "glow-ring";
+            r.style.cssText = `width:${s}px;height:${s}px;left:${cx}px;top:${cy}px`;
+            document.body.appendChild(r);
+            setTimeout(() => r.remove(), 1600);
+          }, i * 180);
+        });
+      }
 
-      const hE=["❤️","💕","💗","💖","💝","🌸","✨","💞"];
-      function spawnFH(){const c=2+Math.floor(Math.random()*2);for(let i=0;i<c;i++){setTimeout(()=>{const h=document.createElement("div");h.className="float-heart";h.textContent=hE[Math.floor(Math.random()*hE.length)];h.style.left=5+Math.random()*90+"vw";h.style.bottom="-40px";const fs=window.innerWidth<600?16:20;h.style.fontSize=fs+Math.random()*16+"px";const d=3.5+Math.random()*3;h.style.animationDuration=d+"s";document.body.appendChild(h);setTimeout(()=>h.remove(),d*1000)},i*120)}}
+      const hE = ["❤️", "💕", "💗", "💖", "💝", "🌸", "✨", "💞"];
+      function spawnFH() {
+        const c = 2 + Math.floor(Math.random() * 2);
+        for (let i = 0; i < c; i++) {
+          setTimeout(() => {
+            const h = document.createElement("div");
+            h.className = "float-heart";
+            h.textContent = hE[Math.floor(Math.random() * hE.length)];
+            h.style.left = 5 + Math.random() * 90 + "vw";
+            h.style.bottom = "-40px";
+            const fs = window.innerWidth < 600 ? 16 : 20;
+            h.style.fontSize = fs + Math.random() * 16 + "px";
+            const d = 3.5 + Math.random() * 3;
+            h.style.animationDuration = d + "s";
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), d * 1000);
+          }, i * 120);
+        }
+      }
 
-      function spawnHB(){const n=window.innerWidth<600?12:20;for(let i=0;i<n;i++){setTimeout(()=>{const h=document.createElement("div");h.className="float-heart";h.textContent=hE[Math.floor(Math.random()*hE.length)];h.style.left=10+Math.random()*80+"vw";h.style.bottom=Math.random()*30+"vh";const fs=window.innerWidth<600?14:18;h.style.fontSize=fs+Math.random()*20+"px";const d=2.5+Math.random()*2.5;h.style.animationDuration=d+"s";document.body.appendChild(h);setTimeout(()=>h.remove(),d*1000)},i*80)}}
+      function spawnHB() {
+        const n = window.innerWidth < 600 ? 12 : 20;
+        for (let i = 0; i < n; i++) {
+          setTimeout(() => {
+            const h = document.createElement("div");
+            h.className = "float-heart";
+            h.textContent = hE[Math.floor(Math.random() * hE.length)];
+            h.style.left = 10 + Math.random() * 80 + "vw";
+            h.style.bottom = Math.random() * 30 + "vh";
+            const fs = window.innerWidth < 600 ? 14 : 18;
+            h.style.fontSize = fs + Math.random() * 20 + "px";
+            const d = 2.5 + Math.random() * 2.5;
+            h.style.animationDuration = d + "s";
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), d * 1000);
+          }, i * 80);
+        }
+      }
 
       /* ═══ FIREWORKS ═══ */
-      let fwP=[],fwAId=null,fwR=false,fwLI=null;
-      const CL=["#ff6b9d","#ff85b3","#ffb347","#ffe066","#ff4d4d","#c879ff","#79b8ff","#ff80bf","#fff","#ffcce0"];
-      class FP{constructor(x,y,c,vx,vy,s,l){this.x=x;this.y=y;this.vx=vx;this.vy=vy;this.c=c;this.s=s;this.l=l;this.ml=l;this.g=.09;this.t=[]}update(){this.t.push({x:this.x,y:this.y});if(this.t.length>6)this.t.shift();this.vx*=.97;this.vy*=.97;this.vy+=this.g;this.x+=this.vx;this.y+=this.vy;this.l--}draw(c){const a=this.l/this.ml;for(let i=0;i<this.t.length;i++){const ta=(i/this.t.length)*a*.5;c.beginPath();c.arc(this.t[i].x,this.t[i].y,this.s*.5,0,Math.PI*2);c.fillStyle=this.c.replace(")",`,${ta})`).replace("rgb","rgba").replace("rgba(rgba","rgba");c.globalAlpha=ta;c.fill()}c.globalAlpha=a;c.beginPath();c.arc(this.x,this.y,this.s,0,Math.PI*2);c.fillStyle=this.c;c.shadowBlur=8;c.shadowColor=this.c;c.fill();c.shadowBlur=0;c.globalAlpha=1}}
-      function explode(x,y){const c1=CL[Math.floor(Math.random()*CL.length)],c2=CL[Math.floor(Math.random()*CL.length)];const n=window.innerWidth<600?35:60+Math.floor(Math.random()*40);for(let i=0;i<n;i++){const a=(Math.PI*2/n)*i+Math.random()*.3,sp=2+Math.random()*4;fwP.push(new FP(x,y,Math.random()>.5?c1:c2,Math.cos(a)*sp,Math.sin(a)*sp,1.2+Math.random()*2,45+Math.floor(Math.random()*30)))}for(let i=0;i<10;i++){const a=Math.random()*Math.PI*2,sp=.5+Math.random()*1.5;fwP.push(new FP(x,y,"#fff",Math.cos(a)*sp,Math.sin(a)*sp,1.5+Math.random(),20))}}
-      function launchRocket(){const x=60+Math.random()*(window.innerWidth-120),tY=60+Math.random()*(window.innerHeight*.4);let ry=window.innerHeight+10;const sp=16+Math.random()*8,st=Math.abs(ry-tY)/sp;let s=0;const ti=setInterval(()=>{if(!fwR){clearInterval(ti);return}const p=s/st,cy=ry-(ry-tY)*p;fwP.push(new FP(x+(Math.random()-.5)*3,cy,"#ffcce0",(Math.random()-.5)*.6,.4+Math.random(),.8+Math.random(),16));s++;if(s>=st){clearInterval(ti);explode(x,tY)}},16)}
-      function fwLoop(){ctx.clearRect(0,0,canvas.width,canvas.height);fwP=fwP.filter(p=>p.l>0);fwP.forEach(p=>{p.update();p.draw(ctx)});if(fwR)fwAId=requestAnimationFrame(fwLoop)}
-      function startFireworks(){fwR=true;fwLoop();setTimeout(()=>explode(window.innerWidth*.3,window.innerHeight*.3),100);setTimeout(()=>explode(window.innerWidth*.7,window.innerHeight*.25),350);setTimeout(()=>explode(window.innerWidth*.5,window.innerHeight*.2),650);const interval=window.innerWidth<600?1200:900;fwLI=setInterval(()=>{if(!fwR)return;launchRocket();if(Math.random()>.6)setTimeout(launchRocket,300)},interval)}
-      function stopFW(){fwR=false;clearInterval(fwLI);if(fwAId)cancelAnimationFrame(fwAId)}
-      window.addEventListener("resize",()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight});
+      let fwP = [], fwAId = null, fwR = false, fwLI = null;
+      const CL = ["#ff6b9d","#ff85b3","#ffb347","#ffe066","#ff4d4d","#c879ff","#79b8ff","#ff80bf","#fff","#ffcce0"];
+      class FP {
+        constructor(x, y, c, vx, vy, s, l) {
+          this.x = x; this.y = y; this.vx = vx; this.vy = vy;
+          this.c = c; this.s = s; this.l = l; this.ml = l;
+          this.g = 0.09; this.t = [];
+        }
+        update() {
+          this.t.push({ x: this.x, y: this.y });
+          if (this.t.length > 6) this.t.shift();
+          this.vx *= 0.97; this.vy *= 0.97;
+          this.vy += this.g;
+          this.x += this.vx; this.y += this.vy;
+          this.l--;
+        }
+        draw(c) {
+          const a = this.l / this.ml;
+          for (let i = 0; i < this.t.length; i++) {
+            const ta = (i / this.t.length) * a * 0.5;
+            c.beginPath();
+            c.arc(this.t[i].x, this.t[i].y, this.s * 0.5, 0, Math.PI * 2);
+            c.fillStyle = this.c.replace(")", `,${ta})`).replace("rgb", "rgba").replace("rgba(rgba", "rgba");
+            c.globalAlpha = ta; c.fill();
+          }
+          c.globalAlpha = a;
+          c.beginPath();
+          c.arc(this.x, this.y, this.s, 0, Math.PI * 2);
+          c.fillStyle = this.c;
+          c.shadowBlur = 8; c.shadowColor = this.c;
+          c.fill(); c.shadowBlur = 0; c.globalAlpha = 1;
+        }
+      }
+      function explode(x, y) {
+        const c1 = CL[Math.floor(Math.random() * CL.length)], c2 = CL[Math.floor(Math.random() * CL.length)];
+        const n = window.innerWidth < 600 ? 35 : 60 + Math.floor(Math.random() * 40);
+        for (let i = 0; i < n; i++) {
+          const a = ((Math.PI * 2) / n) * i + Math.random() * 0.3, sp = 2 + Math.random() * 4;
+          fwP.push(new FP(x, y, Math.random() > 0.5 ? c1 : c2, Math.cos(a) * sp, Math.sin(a) * sp, 1.2 + Math.random() * 2, 45 + Math.floor(Math.random() * 30)));
+        }
+        for (let i = 0; i < 10; i++) {
+          const a = Math.random() * Math.PI * 2, sp = 0.5 + Math.random() * 1.5;
+          fwP.push(new FP(x, y, "#fff", Math.cos(a) * sp, Math.sin(a) * sp, 1.5 + Math.random(), 20));
+        }
+      }
+      function launchRocket() {
+        const x = 60 + Math.random() * (window.innerWidth - 120), tY = 60 + Math.random() * (window.innerHeight * 0.4);
+        let ry = window.innerHeight + 10;
+        const sp = 16 + Math.random() * 8, st = Math.abs(ry - tY) / sp;
+        let s = 0;
+        const ti = setInterval(() => {
+          if (!fwR) { clearInterval(ti); return; }
+          const p = s / st, cy = ry - (ry - tY) * p;
+          fwP.push(new FP(x + (Math.random() - 0.5) * 3, cy, "#ffcce0", (Math.random() - 0.5) * 0.6, 0.4 + Math.random(), 0.8 + Math.random(), 16));
+          s++;
+          if (s >= st) { clearInterval(ti); explode(x, tY); }
+        }, 16);
+      }
+      function fwLoop() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        fwP = fwP.filter((p) => p.l > 0);
+        fwP.forEach((p) => { p.update(); p.draw(ctx); });
+        if (fwR) fwAId = requestAnimationFrame(fwLoop);
+      }
+      function startFireworks() {
+        fwR = true; fwLoop();
+        setTimeout(() => explode(window.innerWidth * 0.3, window.innerHeight * 0.3), 100);
+        setTimeout(() => explode(window.innerWidth * 0.7, window.innerHeight * 0.25), 350);
+        setTimeout(() => explode(window.innerWidth * 0.5, window.innerHeight * 0.2), 650);
+        const interval = window.innerWidth < 600 ? 1200 : 900;
+        fwLI = setInterval(() => {
+          if (!fwR) return;
+          launchRocket();
+          if (Math.random() > 0.6) setTimeout(launchRocket, 300);
+        }, interval);
+      }
+      function stopFW() {
+        fwR = false;
+        clearInterval(fwLI);
+        if (fwAId) cancelAnimationFrame(fwAId);
+      }
+      window.addEventListener("resize", () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        checkScrollable();
+      });
+
+      // Check scroll lúc đầu
+      setTimeout(checkScrollable, 500);
     </script>
   </body>
 </html>
